@@ -1,6 +1,5 @@
 package Chessboard;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 
 /**
@@ -29,12 +28,13 @@ import java.util.HashSet;
  *  13 x 13 	  73,712 	 
  *  14 x 14 	  365,596 	 
  *
+ * todo: ohjelmassa saattaa olla ylimääräisiä ominaisuuksia sekä ehtolauseita
  */
 public class EightQueens {
   public static void main(String[] args) {
     // Pelikentän koon ja aloituspisteen asettaminen!
     // -------------------------------------------------------------
-    int chessBoardSize = 7;
+    int chessBoardSize = 8;
     // -------------------------------------------------------------
     if(chessBoardSize<4)chessBoardSize=4;
     QueenSolver s = new QueenSolver(chessBoardSize);
@@ -44,19 +44,19 @@ public class EightQueens {
 
 class QueenSolver {
   private int size;
-
+  //konstruktori
   public QueenSolver(int boardSize) {
     size = boardSize;
   }
 
-  public void printer(int[][] board) {
-    System.out.println(Arrays.deepToString(board));
-  }
- 
   public void startGame() {
+    /**
+     * Varsinainen ohjelma suoritetaan täällä(tällä hetkellä kovinkin sekalainen)
+     * tarkoitus on siistiä sitä jakamalla toimintoja eri metodeille
+     */
     ArrayList<Integer> tempPath = new ArrayList<Integer>();
     int[][] board = new int[this.size][this.size];
-    ArrayList<int[][]> allPaths = new ArrayList<int[][]>();
+    ArrayList<int[][]> allPaths = new ArrayList<int[][]>();   //tarkempi lista pelilaudasta ja kuningattarien sijoituksista
     ArrayList<ArrayList<Integer>> allPathsInList = new ArrayList<ArrayList<Integer>> ();
     int col = 0;
     int counter = 0;
@@ -65,9 +65,8 @@ class QueenSolver {
     int flawColumn = 0;
     int lastGoodPoint = -1;
     
-    
     while (true) {
-      if(col==0&&startRow>=this.size-1)break;
+      if(col==0&&startRow>=this.size-1)break;   //mikäli kaikki vaihtoehdot ovat käyty läpi pysähtyy ohjelma tähän
       flawColumn=0;
       counter=0;
       for (int row = startRow; row < this.size;row++) {
@@ -83,7 +82,7 @@ class QueenSolver {
         } 
         counter += 1;
         flawColumn +=1;
-        board[col][row] = 0;//testissä oli 1 jotta pysty seuraa paikoitusta debuggauksessa
+        board[col][row] = 0;   //testissä oli 1 jotta pysty seuraa paikoitusta debuggauksessa
       }
       if (flawColumn >= this.size||(flawColumn+startRow)>=this.size||col>=this.size) {
         if(addedQuuens==this.size){
@@ -104,12 +103,16 @@ class QueenSolver {
         tempPath.remove(tempPath.size()-1);
       }
     }
-    
+    //varmistetaan ettei löydy duplikaatteja
     ArrayList<ArrayList<Integer>> listWithoutDuplicates = new ArrayList<>(new HashSet<>(allPathsInList));
-    System.out.println("vastauksia löytyi: "+listWithoutDuplicates.size() );
+    System.out.println("Erillaisia sijoituksia löytyi: "+listWithoutDuplicates.size()+" kpl." );
   }
 
   private boolean isPossible(int posCol, int posRow, int[][] queensOnBoard) {
+    /**
+     * Metodi tarkistaa voiko kyseiseen ruutuun sijoittaa kuningattaren
+     * mikäli voi palauttaa true arvon, muuten palauttaa falsen.
+     */
     int tempRow = posRow;
     // tarkistetaan taakse
     for (int i = posCol; i >= 0; i--) {
