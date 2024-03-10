@@ -1,4 +1,4 @@
-# Eight_Queens
+# Eight_Queens (Harjoitustyö)
 
 Eräänlainen Backtracking-ratkaisu seuraavaan ongelmaan:
 Kahdeksan kuningattaren ongelma on klassinen kombinatoriikan ongelma, 
