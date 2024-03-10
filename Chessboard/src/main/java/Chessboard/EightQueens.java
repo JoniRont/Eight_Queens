@@ -102,10 +102,6 @@ class QSolver {
   }
   
   public ArrayList<int[][]> startGame() {
-    /**
-     * Varsinainen ohjelma suoritetaan täällä(tällä hetkellä kovinkin sekalainen)
-     * tarkoitus on siistiä sitä jakamalla toimintoja eri metodeille
-     */
     ArrayList<Integer> tempPath = new ArrayList<Integer>(); //<- väliaikaista listaa käytetään kuningattarien sijantien tarkistukseen sekä uusien sen hetkisten sijaintien asettamiseen
     int[][] board = new int[this.size][this.size];
     ArrayList<int[][]> allPaths = new ArrayList<int[][]>(); // tarkempi lista pelilaudasta ja kuningattarien sijoituksista
